@@ -21,10 +21,12 @@ filetype indent on
 " auto read changes from file.
 set autoread
 
-" set TAB to 8 bytes.
+" set TAB to 4 bytes.
 "set expandtab
 "set shiftwidth=8
-set tabstop=8
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 "set smarttab
 "set lbr
 
@@ -122,6 +124,50 @@ endif
 set laststatus=2
 set statusline=%F\ [TYPE=%Y]\ [ASCII:HEX=\%03.3b:%02.2B]\ [POS=%04l,%04v][%p%%]\ [LINES=%L]
 
+"SET Comment START
+autocmd BufNewFile *.php,*.js,*.cpp,*.c exec ":call SetComment()" |normal 10Go
 
+func SetComment()
+	call setline(1, '#***********************************************')
+
+	call append(1, '#')
+	call append(2, '#      Filename: '.expand("%"))
+	call append(3, '#')
+	call append(4, '#        Author: Mp - g.goodian@gmail.com')
+	call append(5, '#   Description: ---')
+	call append(6, '#        Create: '.strftime("%Y-%m-%d %H:%M:%S"))
+	call append(7, '# Last Modified: '.strftime("%Y-%m-%d %H:%M:%S"))
+	call append(8, '#***********************************************')
+	call append(9, '')
+	if &filetype == 'php'
+		call append(10, '<?php')
+		call append(11, '')
+	elseif &filetype == 'cpp'
+		call append(10, '#include <iostream>')
+		call append(11, 'using namespace std;')
+		call append(12, '')
+	elseif &filetype == 'c'
+		call append(10, '#include <stdio.h>')
+		call append(11, '#include <stdlib.h>')
+		call append(12, '')
+	endif
+endfunc
+
+map <F2> :call SetComment()<CR>:10<CR>o
+"SET Comment END
+
+"SET Last Modified Time START
+
+func DataInsert()
+	call cursor(9,1)
+	if search ('Last Modified') != 0
+		let line = line('.')
+		call setline(line, '# Last Modified: '.strftime("%Y-%m-%d %H:%M:%S"))
+	endif
+endfunc
+
+autocmd FileWritePre,BufWritePre *.php,*.js,*.cpp,*.c ks|call DataInsert() |'s
+"SET Last Modified Time END
+"
 " End /etc/vimrc
 
