@@ -125,20 +125,36 @@ set laststatus=2
 set statusline=%F\ [TYPE=%Y]\ [ASCII:HEX=\%03.3b:%02.2B]\ [POS=%04l,%04v][%p%%]\ [LINES=%L]
 
 "SET Comment START
-autocmd BufNewFile *.php,*.js,*.cpp,*.c exec ":call SetComment()" |normal 10Go
+autocmd BufNewFile *.sh,*.php,*.js,*.cpp,*.c exec ":call SetComment()" |normal 10Go
 
 func SetComment()
-	call setline(1, '#***********************************************')
+	if &filetype == 'sh'
+		call setline(1,'#########################################################################')
+		call append(1, '#')
+		call append(2, '#      Filename: '.expand('%'))
+		call append(3, '#')
+		call append(4, '#        Author: g.goodian@gmail.com')
+		call append(5, '#   Description: ---')
+		call append(6, '#        Create: '.strftime("%Y-%m-%d %H:%M:%S"))
+		call append(7, '# Last Modified: '.strftime("%Y-%m-%d %H:%M:%S"))
+		call append(8, '#########################################################################')
+		call append(9, '')
+		call append(10, '#!/bin/bash')
+		call append(11, '')
+	else
+		call setline(1, '/************************************************************************')
 
-	call append(1, '#')
-	call append(2, '#      Filename: '.expand("%"))
-	call append(3, '#')
-	call append(4, '#        Author: Mp - g.goodian@gmail.com')
-	call append(5, '#   Description: ---')
-	call append(6, '#        Create: '.strftime("%Y-%m-%d %H:%M:%S"))
-	call append(7, '# Last Modified: '.strftime("%Y-%m-%d %H:%M:%S"))
-	call append(8, '#***********************************************')
-	call append(9, '')
+		call append(1, ' *')
+		call append(2, ' *      Filename: '.expand("%"))
+		call append(3, ' *')
+		call append(4, ' *        Author: g.goodian@gmail.com')
+		call append(5, ' *   Description: ---')
+		call append(6, ' *        Create: '.strftime("%Y-%m-%d %H:%M:%S"))
+		call append(7, ' * Last Modified: '.strftime("%Y-%m-%d %H:%M:%S"))
+		call append(8, ' *************************************************************************/')
+		call append(9, '')
+	endif
+
 	if &filetype == 'php'
 		call append(10, '<?php')
 		call append(11, '')
@@ -166,7 +182,7 @@ func DataInsert()
 	endif
 endfunc
 
-autocmd FileWritePre,BufWritePre *.php,*.js,*.cpp,*.c ks|call DataInsert() |'s
+autocmd FileWritePre,BufWritePre *.sh,*.php,*.js,*.cpp,*.c ks|call DataInsert() |'s
 "SET Last Modified Time END
 "
 " End /etc/vimrc
