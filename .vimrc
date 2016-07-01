@@ -13,6 +13,7 @@ set cino=:0g0t0(sus
 set colorcolumn=81
 set showmatch
 set matchtime=5
+set scrolloff=3
 
 " auto detect filetype and indent
 filetype plugin on
@@ -75,7 +76,7 @@ nmap <silent> <leader>t :TlistToggle<cr>
 
 " set cscope support
 if has("cscope")
-	set csprg=/usr/local/bin/cscope
+	set csprg=/usr/bin/cscope
 	set csto=0
 	set cst
 	set nocsverb
@@ -129,7 +130,7 @@ autocmd BufNewFile *.sh,*.php,*.js,*.cpp,*.[ch] exec ":call SetComment()" |norma
 
 func SetComment()
 	if &filetype == 'sh'
-		call setline(1,'#########################################################################')
+		call setline(1,'#!/bin/bash')
 		call append(1, '#')
 		call append(2, '#      Filename: '.expand('%'))
 		call append(3, '#')
@@ -137,12 +138,10 @@ func SetComment()
 		call append(5, '#   Description: ---')
 		call append(6, '#        Create: '.strftime("%Y-%m-%d %H:%M:%S"))
 		call append(7, '# Last Modified: '.strftime("%Y-%m-%d %H:%M:%S"))
-		call append(8, '#########################################################################')
+		call append(8, '#')
 		call append(9, '')
-		call append(10, '#!/bin/bash')
-		call append(11, '')
 	else
-		call setline(1, '/************************************************************************')
+		call setline(1, '/*')
 
 		call append(1, ' *')
 		call append(2, ' *      Filename: '.expand("%"))
@@ -151,7 +150,7 @@ func SetComment()
 		call append(5, ' *   Description: ---')
 		call append(6, ' *        Create: '.strftime("%Y-%m-%d %H:%M:%S"))
 		call append(7, ' * Last Modified: '.strftime("%Y-%m-%d %H:%M:%S"))
-		call append(8, ' *************************************************************************/')
+		call append(8, ' */')
 		call append(9, '')
 	endif
 
