@@ -185,7 +185,7 @@ func DataInsert()
 	endif
 endfunc
 
-autocmd FileWritePre,BufWritePre *.sh,*.php,*.js,*.cpp,*.c ks|call DataInsert() |'s
+autocmd FileWritePre,BufWritePre *.sh,*.php,*.js,*.cpp,*.c,*.h,*.py,*.java ks|call DataInsert() |'s
 "SET Last Modified Time END
 "
 " End /etc/vimrc
