@@ -140,6 +140,18 @@ func SetComment()
 		call append(7, '# Last Modified: '.strftime("%Y-%m-%d %H:%M:%S"))
 		call append(8, '#')
 		call append(9, '')
+	elseif &filetype == 'python'
+		call setline(1,'#!/usr/bin/env python')
+		call append(1, '# -*- coding:utf-8 -*-')
+		call append(2, '#')
+		call append(3, '#      Filename: '.expand('%'))
+		call append(4, '#')
+		call append(5, '#        Author: g.goodian@gmail.com')
+		call append(6, '#   Description: ---')
+		call append(7, '#        Create: '.strftime("%Y-%m-%d %H:%M:%S"))
+		call append(8, '# Last Modified: '.strftime("%Y-%m-%d %H:%M:%S"))
+		call append(9, '#')
+		call append(10, '')
 	else
 		call setline(1, '/*')
 
