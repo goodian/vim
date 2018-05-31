@@ -126,7 +126,7 @@ set laststatus=2
 set statusline=%F\ [TYPE=%Y]\ [ASCII:HEX=\%03.3b:%02.2B]\ [POS=%04l,%04v][%p%%]\ [LINES=%L]
 
 "SET Comment START
-autocmd BufNewFile *.sh,*.php,*.js,*.cpp,*.[ch] exec ":call SetComment()" |normal 10Go
+autocmd BufNewFile *.sh,*.php,*.js,*.cpp,*.py,*.[ch] exec ":call SetComment()" |normal 10Go
 
 func SetComment()
 	if &filetype == 'sh'
