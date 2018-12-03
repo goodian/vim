@@ -189,7 +189,7 @@ func DataInsert()
 	call cursor(9,1)
 	if search ('Last Modified') != 0
 		let line = line('.')
-		if &filetype == 'sh'
+		if &filetype == 'sh' || &filetype == 'python'
 			call setline(line, '# Last Modified: '.strftime("%Y-%m-%d %H:%M:%S"))
 		else
 			call setline(line, ' * Last Modified: '.strftime("%Y-%m-%d %H:%M:%S"))
