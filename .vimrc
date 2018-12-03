@@ -152,6 +152,9 @@ func SetComment()
 		call append(8, '# Last Modified: '.strftime("%Y-%m-%d %H:%M:%S"))
 		call append(9, '#')
 		call append(10, '')
+		call append(11, 'import os')
+		call append(12, 'import sys')
+		call append(13, '')
 	else
 		call setline(1, '/*')
 
